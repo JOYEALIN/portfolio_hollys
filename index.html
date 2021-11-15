@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-title" content="HOLLYS">
+    <meta name="robots" content="index,nofollow">
+    <meta name="description" content="할리스에서 할링하세요">
+    <!-- OG -->
+    <!-- TW -->
+
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- 외부플러그인 / fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <!-- 외부플러그인 / bx-slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.css">
+    <title>HOLLYS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+        
+        html,body{font-family: 'Noto Sans KR', sans-serif;}
+        h2{margin-bottom:8px;font-weight:700;font-size:24px;}
+        .section{margin:2em 0;}
+        .container{width:100%;max-width:1200px;margin:0 auto;padding:10px;}
+
+        .skip-menu>a{position:fixed;left:0;right:0;top:-100px;padding:10px;background-color:#000;font-weight:900;font-size:32px;color:#fff;text-align:center;}
+        .skip-menu>a:focus{top:0;}
+
+        /* POP-UP STYLE */
+        .popup-container{display:none;width:80%;position:fixed;left:50%;top:50%;transform: translate(-50%,-50%);z-index:999998;}
+        .popup-container .container video{width:100%;}
+        .popup-container .close-btn{position:absolute;top:5%;right:5%;font-size:20px;cursor:pointer;}
+
+        /* HEADER STYLE */
+        .header{background-color:#8b5e34;position:relative;}
+        .header .container{display:flex;flex-flow:row wrap;justify-content:space-between;align-items:center;}
+        .header .container button{border-radius:25px;padding:0.5em;background-color:#588157;color:#fff;cursor: pointer;font-weight:900;font-size:13px;}
+        .main-nav ul{display: none;}
+        .main-nav li{font-size:1.3em;font-weight:730;}
+        .main-nav li:hover{color:#b5121b;}
+        .main-nav .sub-nav{display:none;}
+        .sub-nav li{font-size:0.8em;font-weight:600;}
+        .sub-nav li a:hover{color:#b5121b;}
+        .quick-menu01{display: none;}
+        .quick-menu01 li{margin-right:1em;font-weight:500;font-size:14px;}
+        .quick-menu01 li:hover,.quick-menu01 a:hover{color:#b5121b}
+         h1 .logo{display:none;}
+         h1 .mo-logo{position: relative;margin-right:50px;} 
+         h1 .mo-logo img{width:150px;}      
+        .quick-menu02{display:none;}
+        .quick-menu02 li{margin-right:1em;font-weight: 400;font-size:12px;}
+        .quick-menu02 a{color:#666;}
+        .btn-nav{width:20px;height:20px;display:flex;flex-flow:row wrap;align-content: space-between;cursor:pointer;}
+        .btn-nav span{width:100%;height:3px;background-color: #fff;text-indent:-99999px;}
+        .nav{display:none;position:absolute;left:0;right:0;top:100%;padding:10px;background-color:lightgray;z-index:999999;}
+        .main-nav,.main-nav a{color:#666;}
+        .main-nav>li{margin:0.5em 0;cursor:pointer;}
+        .floating{display:none;position:fixed;z-index: 999999;top:18px;left:50%;transform:translate(600px,0);}
+       
+        /* MAIN BANNER STYLE */
+        .bx-wrapper{margin:0;border:none;box-shadow: none;}
+        .bx-wrapper .bx-pager{bottom:22px;}
+        .bx-wrapper .bx-pager.bx-default-pager a {background: #fff;}
+        .bx-wrapper .bx-pager.bx-default-pager a:hover,.bx-wrapper .bx-pager.bx-default-pager a.active,.bx-wrapper .bx-pager.bx-default-pager a:focus {background: #fff;}
+        .bx-wrapper .bx-pager.bx-default-pager a.active,.bx-wrapper .bx-pager.bx-default-pager a:hover{background-color: #b5121b;}
+        
+
+        /* MAIN STYLE */
+        .desk ul{display:flex;justify-content: space-around;}
+        .mo ul{display:flex;flex-flow:row wrap;justify-content: space-between;text-align:center;padding-top:10px;}
+        .desk{display:none;}
+        .desk img{width:100%;}
+        .desk ul li{width:24.36440677966102%;margin-right:0.8474576271186441%;}
+        .desk ul li:last-child{margin-right:0;}
+        .desk>ul>li{padding-top:100px;position:relative;background-color: #f5f5f5;}
+        .desk>ul>li:nth-child(2){width:45.76271186440678%;background-color:#fff;display:flex;flex-flow:column nowrap;justify-content:flex-end;}
+        .desk .tit-box{position:absolute;left:20px;top:10px;color:#333;}
+        .desk .mall-sub{position:relative;}
+        .desk .mall-sub::before,.desk .mall-sub::after{content:'';display:block;width:1px;height:80px;border-right:1px dotted #666;position:absolute;top:28px;left:177px;}
+        .desk .mall-sub::after{left:365px;}
+        .desk .mall-sub li{width:32.09876543209877%;margin-right:1.851851851851852%;font-size:14px;color:#333;text-align:center;}
+        .desk .mall-sub li:last-child{margin-right:0;}
+        .desk .mall-sub img{width:70%;}
+        
+        /* BANNER STYLE */
+        .banner .container{padding:0;display:flex;flex-flow:row wrap;justify-content:space-between;}
+        .banner .img-box{width:100%;margin-bottom:6px;}
+        .banner .img-box:last-child{margin-bottom:0;}
+        .banner img{width:100%;}
+
+        /* NOTICE STYLE */
+        .notice .container{display:flex;color:#333;}
+        .notice .container>div{flex:1;margin-right:2em;}
+        .notice .container>div:last-child{margin-right:0;}
+        .academy,.solution{display:none;}
+        .news ul{display:flex;flex-flow:row wrap;justify-content: space-between;}
+        .news ul li:nth-child(2n+1){width:70%;}
+        .news ul li:nth-child(2n){width:30%;text-align: right;}
+        .notice a{color:#333;}
+
+        /* LIVE STYLE */
+        .live{margin-bottom:50px;display:none;}
+        .live .container{display: flex;color:#333;}
+        .live h2{margin-right:1em;}
+        .live ul{display:flex;align-items:center;}
+        .live li{margin-right:0.5em;}
+        .live img{height:2em;filter:opacity(50%);}
+
+        /* FOOTER STYLE */
+        
+        .footer ul{height:50px;border-top:1px solid #999;background-color: #fff;display: flex;align-items: center;position:relative;}
+        .footer ul li{flex:1;font-weight: 500;font-size:20px;text-align: center;}
+        .footer ul::before{content:'';display: block;width:2px;height: 1em;background-color: #999;position:absolute;left:52%;top:37%;}
+        .footer-container{padding:1em 0.5em;background-color: #b5121b;}
+        .footer-container ul{display:flex;flex-flow:row wrap;justify-content:space-between;padding-left:10px;}
+        .footer-container li a{color:#000;font-size:16px;}
+        .footer-container li{width:33.3333%;text-align: center;font-size:1em;position:relative;}
+        .footer-container ul li:nth-child(4){width:40%;}
+        .footer-container ul li:nth-child(5){width:60%;}
+        .footer-container ul li:nth-child(6){width:40%;}
+        .footer-container ul li:nth-child(7){width:60%;}
+        .footer-container ul li:nth-child(8){width:100%;}
+        .footer-container ul li::after{content:'';display:block;width:1px;height:10px;background-color: #000;position:absolute;right:-5px;top:6px;}
+        .footer-container ul li:nth-child(3)::after,.footer-container li:nth-child(5)::after,.footer-container li:nth-child(7)::after,.footer-container li:nth-child(8)::after,.footer-container li:last-child::after{display:none;}
+        .footer-container ul li:nth-child(6)::after{right:-19px;}
+        .address{font-style:normal;font-size:13px;color:#000;}
+        .address p{margin:0.2em 0;}
+
+
+           
+        @media (min-width:1200px){
+            .popup-container{z-index:999998;}
+            .floating{left:40%;}
+            .header{background-color:#fff;border-bottom:2px solid #b5121b;}
+            .header #btn2{display:none;}
+            .header .container{align-items:flex-start;}
+            .header .container::before{display:none;}
+            .quick-menu01{display:flex;}
+             h1 .logo{display:block;margin-left:50%;}
+             h1 .logo img{width:80px;}
+             h1 .mo-logo{display:none;}
+            .quick-menu02{display:flex;}
+            .btn-nav{display:none;}
+            .nav{display:block;position:static;width:100%;padding-bottom:0;background-color:#fff;}
+            .main-nav{display:flex;justify-content: space-between;color:rgb(59, 59, 59);}
+            .main-nav>li{margin-bottom:0;font-weight:750;font-size:25px;}
+            .sub-nav{display:flex;position:absolute;left:0;right:0;top:100%;padding:1em 100px;background-color:#b5121b;}
+            .sub-nav a{font-size:19px;color:#fff;}
+            #menu-nav.sub-nav{padding-left:20px;}
+            #hollys-mall-nav.sub-nav{padding-left:180px;}
+            #membership-nav.sub-nav{padding-left:420px;}
+            #hollys-news-nav.sub-nav{padding-left:660px;}
+            #store-nav.sub-nav{padding-left:910px;}
+            #hollysis-nav .sub-nav{padding-left:1050px;padding-right:0;}
+            .sub-nav li a:hover{color:#333;}
+            .floating{display:block;}
+
+            /* Main Style */
+            .mo{display:none;}
+            .desk{display:block;}
+
+            /* BANNER Style */
+            .banner .container{flex-wrap:nowrap;padding:10px;}
+            .banner .img-box{margin-bottom:0;margin-right:2em;}
+            .banner .img-box:nth-child(2){margin-right:0;}
+            .banner .img-box:nth-child(3),.banner .img-box:nth-child(4),.banner .img-box:nth-child(5){display:none;margin-right:0;}
+
+            /* NOTICE Style */
+            .notice .container{border-bottom:2px solid #b5121b;padding-bottom:2em;}
+            .academy,.solution{display:block;}
+
+            /* LIVE Style */
+            .live{display:block;}
+
+            /* FOOTER Style */
+            .footer>ul{display:none;}
+            .footer-container>ul{display:none;}
+            
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="skip-menu">
+        <a href="#main">본문 바로가기</a>
+    </div>
+
+
+    <section class="wrap">           
+        <header class="header">
+            <div class="container">
+                <button id="btn2">창업설명회</button>
+                <ul class="quick-menu01">
+                    <li>
+                        <a href="#">가맹문의</a>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </li>
+                    <li>
+                        <a href="#">아카데미</a>
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    </li>
+                    
+                    <li>
+                        <a href="#">기업특판</a>
+                        <i class="fa fa-building" aria-hidden="true"></i>
+                    </li>
+                </ul>
+                <h1>
+                    <a href="./index.html">
+                        <span class="logo"><img src="./images/logo.gif" alt="홈으로 이동"></span>
+                        <span class="mo-logo"><img src="./images/mo-logo.png" alt="홈으로 이동"></span>
+                    </a>
+                </h1>
+                <ul class="quick-menu02">
+                    <li><a href="#">멤버십 로그인</a></li>
+                    <li><a href="#">멤버십 가입</a></li>
+                    <li><a href="#">고객센터</a></li>
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">中文</a></li>
+                </ul>
+                <div class="btn-nav">
+                    <span>라인</span>
+                    <span>라인</span>
+                    <span>라인</span>
+                </div>
+                <nav class="nav">
+                    <ul class="main-nav">
+                        <li id="menu">
+                            Menu
+                            <ul class="sub-nav" id="menu-nav">
+                                <li><a href="#">COFFEE</a></li>
+                                <li><a href="#">라떼 · 초콜릿 · 티</a></li>
+                                <li><a href="#">할리치노 · 빙수</a></li>
+                                <li><a href="#">스파클링</a></li>
+                                <li><a href="#">푸드</a></li>
+                                <li><a href="#">MD상품</a></li>
+                                <li><a href="#">MD식품</a></li>
+                            </ul>
+                        </li>
+                        <li id="hollys-mall"> 
+                            HOLLYS Mall
+                            <ul class="sub-nav" id="hollys-mall-nav">
+                                <li><a href="#">할리스콘</a></li>
+                                <li><a href="#">할리스카드</a></li>
+                                <li><a href="#">구매내역</a></li>
+                            </ul>
+                        </li>
+                        <li id="membership">
+                            Membership
+                            <ul class="sub-nav" id="membership-nav">
+                                <li><a href="#">스마트오더</a></li>
+                                <li><a href="#">멤버십혜택</a></li>
+                            </ul>
+                        </li>
+                        <li id="hollys-news">
+                            HOLLYS News
+                            <ul class="sub-nav" id="hollys-news-nav">
+                                <li><a href="#">Notice</a></li>
+                                <li><a href="#">Event</a></li>
+                            </ul>
+                        </li>
+                        <li id="store">
+                            Store
+                            <ul class="sub-nav" id="store-nav">
+                                <li><a href="#">매장검색</a></li>
+                            </ul>
+                        </li>
+                        <li id="hollysis">
+                            HOLLYS Is
+                            <ul class="sub-nav" id="hollysis-nav">
+                                <li><a href="#">HOLLYS</a></li>
+                                <li><a href="#">할리스 위치 및 연락처</a></li>
+                                <li><a href="#">채용 안내</a></li>
+                                <li><a href="#">가맹문의 및 절차</a></li>
+                                <li><a href="#">B2B 사업 소개</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="floating" id="btn3">
+                    <a href="#"><img src="./images/floating.png" alt="창업박람회 바로가기"></a>
+                </div>
+            </div>   
+        </header>
+        <div class="popup-container">
+                <div class="container">
+                    <video src="./media/할리스 영상_1.mp4" loop></video>
+                </div>
+                <div class="close-btn">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+        </div>
+        <section class="main-banner">
+            <div class="slider">
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/mainBanner_202110280108229240.jpg">
+                            <img src="./images/mo-main-new-banner01.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/mainBanner_202110280107335310.jpg">
+                            <img src="./images/mo-main-new-banner02.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner03.jpg">
+                            <img src="./images/mo-main-banner03.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner04.jpg">
+                            <img src="./images/mo-main-banner04.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner05.jpg">
+                            <img src="./images/mo-main-banner05.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner06.jpg">
+                            <img src="./images/mo-main-banner06.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner07.jpg">
+                            <img src="./images/mo-main-banner07.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner08.jpg">
+                            <img src="./images/mo-main-banner08.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <picture>
+                            <source media="(min-width:1200px)" srcset="./images/main-banner09.jpg">
+                            <img src="./images/mo-main-banner09.jpg" alt="할리스앱 딜리버리 바로가기">                            
+                        </picture>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="section main" id="main">
+            <div class="container">
+                <div class="desk">
+                    <ul>
+                        <li>
+                            <div class="tit-box">
+                                <h2>
+                                    FRANCHISE
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </h2>
+                                <p>가맹문의</p>
+                            </div>
+                            <div class="img-box">
+                                <a href="#"><img src="./images/img-fran.png" alt="플랜차이즈 바로가기"></a>
+                            </div>
+                        </li> 
+                        <li>
+                            <div class="tit-box">
+                                <h2>HOLLYS Mall
+                                    <i class="fa fa-coffee" aria-hidden="true"></i>
+                                </h2>
+                                <p>할리스의 다양한 상품들을 온라인에서 만나보세요.</p>
+                            </div>
+                            <ul class="mall-sub">
+                                <li>
+                                    <a href="#"><img src="./images/img-mall01.png" alt="뉴욕 치즈 케이크"></a>
+                                    <br>
+                                    뉴욕 치즈 케이크
+                                </li>
+                                <li>
+                                    <a href="#"><img src="./images/img-mall02.png" alt="고구마 치즈 케이크"></a>
+                                    <br>
+                                    고구마 치즈 케이크
+                                </li>
+                                <li>
+                                    <a href="#"><img src="./images/img-mall03.png" alt="민트 초코 할리치노"></a>
+                                    <br>
+                                    민트 초코 할리치노
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="tit-box">
+                                <h2>
+                                    STORE
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </h2>
+                                <p>전국에 있는 할리스매장을 찾아보세요</p>
+                            </div>
+                            <div class="img-box">
+                                <a href="#"><img src="./images/img-store.png" alt="매장찾기 바로가기"></a>
+                            </div>
+                        </li>                       
+                    </ul>
+                </div>
+                <div class="mo">
+                    <ul>
+                        <li>
+                            <a href="#"><img src="./images/mo-img-main-menu01.gif" alt="할리스몰 바로가기"></a>
+                            <br>
+                            HOLLYS Mall
+                        </li>
+                        <li>
+                            <a href="#"><img src="./images/mo-img-main-menu02.gif" alt="메뉴 바로가기"></a>
+                            <br>
+                            Menu
+                        </li>
+                        <li>
+                            <a href="#"><img src="./images/mo-img-main-menu03.gif" alt="스토어 바로가기"></a>
+                            <br>
+                            Store
+                        </li>
+                        <li>
+                            <a href="#"><img src="./images/mo-img-main-menu04.gif" alt="멤버십 바로가기"></a>
+                            <br>
+                            Membership
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="section banner">
+            <div class="container">
+                <div class="img-box">
+                    <a href="#"><img src="./images/img_banner01.jpg" alt="멤버십 바로가기"></a>
+                </div>
+                <div class="img-box">
+                    <a href="#"><img src="./images/img_banner02.jpg" alt="카드 바로가기"></a>
+                </div>
+                <div class="img-box">
+                    <a href="#"><img src="./images/img_banner03.jpg" alt="B2B 바로가기"></a>
+                </div>
+                <div class="img-box" id="gamang">
+                    <a href="#"><img src="./images/img_banner04.jpg" alt="가맹문의 바로가기"></a>
+                </div>
+                <div class="img-box">
+                    <a href="#"><img src="./images/img_banner05.jpg" alt=" 바로가기"></a>
+                </div>
+            </div>
+        </section>
+        <section class="section notice">
+            <div class="container">
+                <div class="academy">
+                    <h2>
+                        Coffee Academy
+                        <i class="fa fa-gratipay" aria-hidden="true"></i>
+                    </h2>
+                    <p>할리스 아카데미와 함께하는 즐거운 커피여행!</p>
+                </div>
+                <div class="solution">
+                    <h2>
+                        HOLLYS B2B Solution
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </h2>
+                    <p>할리스 F&B는 20년의 커피 노하우를 기반으로 한 할리스 B2B 솔루션을 소개합니다.</p>
+                </div>
+                <div class="news">
+                    <h2>
+                        HOLLYS News
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    </h2>  
+                    <ul>
+                        <li><a href="#">SK제휴서비스 종료 안내</a></li>
+                        <li><a href="#">21-09-30</a></li>
+                        <li><a href="#">개인정보처리방침 변경 안내</a></li>
+                        <li><a href="#">21-09-25</a></li>
+                        <li><a href="#">중간배당 기준일 공고</a></li>
+                        <li><a href="#">21-08-30</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="section live">
+            <div class="container">
+                <h2>HOLLYS Live</h2>
+                <ul>
+                    <li><a href="#"><img src="./images/youtube.svg" alt="유튜브 바로가기"></a></li>
+                    <li><a href="#"><img src="./images/facebook.svg" alt="패이스북 바로가기"></a></li>
+                    <li><a href="#"><img src="./images/instagram.svg" alt="인스타그램 바로가기"></a></li>
+                </ul>
+            </div>
+        </section>
+        <footer class="footer">
+            <ul>
+                <li><a href="#">가맹문의 및 절차</a></li>
+                <li><a href="#">아카데미</a></li>
+            </ul>
+        </footer>
+        <div class="footer-container clearfix">
+            <ul>
+                <li><a href="#">멤버십 로그인</a></li>
+                <li><a href="#">멤버십 가입</a></li>
+                <li><a href="#">고객센터</a></li>
+                <li><a href="#">고객설문</a></li>
+                <li><a href="#"><strong>개인정보처리방침</strong></a></li>
+                <li><a href="#">서비스 이용약관</a></li>
+                <li><a href="#">멤버십 이용약관</a></li>
+                <li><a href="#">할리스카드이용약관</a></li>
+                <li><a href="#">BI 소개</a></li>
+                <li class="wid50"><a href="#">English</a></li>
+                <li class="wid50"><a href="#">PC버전</a></li>
+            </ul>
+            <address class="address">
+                <p><strong>(주)케이지할리스에프앤비(대표자:이종현)</strong></p>
+                <p>통신판매엽:제2019-서울종로-0193호</p>
+                <p>대표전화:02-2188-7100(가맹문의:02-6350-7229)</p>
+                <p>주소:서울특별시 종로구 율곡로 88 삼환빌딩 8층 (운니동)</p>
+                <p>COPYRIGHT &#xa9; KO HOLLYS F&B.ALL Rights Reserved.</p>
+            </address>
+        </div>
+        
+    </section>
+
+    <!-- 외부라이브러리 / jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+    <!-- 외부플러그인 / bxslider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+    <script>
+        $(function(){
+            // // 모바일 내비 호출
+            $('.btn-nav').click(function(){
+                $('.nav').slideToggle(200);
+            }) 
+           
+
+            // 메인메뉴 클릭시 서브네비
+            // $('#main-nav>li').on({
+            //     'click':function(){
+            //         // $('#menu').not(this).childeren(this).slideup();
+            //         $(this).children('.sub-nav').slideToggle(100);
+            //     }
+            // })
+            // $('#menu').click(function(){
+            //     $('#menu-nav').slideToggle(200);
+            // })
+            // $('#hollys-mall').click(function(){
+            //     $('#hollys-mall-nav').slideToggle()
+            // })
+            // $('#membership').click(function(){
+            //     $('#membership-nav').slideToggle()
+            // })
+            // $('#hollys-news').click(function(){
+            //     $('#hollys-news-nav').slideToggle()
+            // })
+            // $('#store').click(function(){
+            //     $('#store-nav').slideToggle()
+            // })
+            // $('#hollysis').click(function(){
+            //     $('#hollysis-nav').slideToggle()
+            // })
+
+            $('.main-nav>li').click(function(){
+                $('.main-nav>li').not($(this)).children('.sub-nav').css('display','none');
+                
+                $(this).children('.sub-nav').slideToggle();
+               
+                
+
+                let pdLeft = $(this).offset().left;
+               $(this).children('.sub-nav').css('padding-left',pdLeft);
+            })
+            // bx슬라이더
+            $('.slider').bxSlider({
+                // mode:'fade'
+                controls:false,
+                auto:true
+            });
+            // 가맹문의 클릭시 영상팝업모바일
+            $('#btn2').click(function(){
+                $('.popup-container').show(300)
+            })
+            $("#btn2").click(function(){
+                $('video')[0].play();
+            })
+
+            // 가맹문의 클릭시 영상팝업pc
+            $('#btn3').click(function(){
+                $('.popup-container').show(300)
+            })
+            $("#btn3").click(function(){
+                $('video').get(0).play();
+            })
+
+
+            
+            // 영상팝업 닫힘
+            $('.close-btn').click(function(){
+                $('.popup-container').hide(300)
+            })
+            $(".close-btn").click(function(){
+                $('video').get(0).pause();
+            })
+             
+        })
+    </script>
+</body>
+</html>
